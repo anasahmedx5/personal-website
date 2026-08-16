@@ -35,6 +35,18 @@ export default function App() {
     }
   }, [darkMode]);
 
+  // Global shortcut for Command Palette (Cmd+K / Ctrl+K)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setCommandPaletteOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   // Scroll to top when section changes
   const handleSectionChange = (sectionId) => {
     setActiveSection(sectionId);
