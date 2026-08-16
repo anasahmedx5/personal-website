@@ -94,8 +94,7 @@ export default function Header({
               <a
                 href={portfolio.personal.resumeUrl}
                 target="_blank"
-                rel="noopener noreferrer"
-                download="Anas_Ahmed_Resume.pdf"
+                rel="noreferrer"
                 className="group flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
               >
                 Resume

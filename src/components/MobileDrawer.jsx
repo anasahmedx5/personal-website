@@ -72,18 +72,7 @@ export default function MobileDrawer({
             </div>
 
             <div className="pt-4 border-t border-border flex flex-col gap-3">
-              <a
-                href={portfolio.personal.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                download="Anas_Ahmed_Resume.pdf"
-                className="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-lg bg-primary text-primary-foreground text-sm font-medium shadow-xs hover:bg-primary/90 transition-colors"
-              >
-                <span>View Resume</span>
-                <ExternalLink className="h-4 w-4" />
-              </a>
-
-              <span className="px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-1">
+              <span className="px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                 Connect
               </span>
               <div className="flex items-center gap-3 px-2">

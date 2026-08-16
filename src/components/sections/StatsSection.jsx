@@ -1,60 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Eye, FolderGit2, Star, Users, Activity, GitFork, ExternalLink } from 'lucide-react';
+import { Heart, Eye, GitCommit, Star, GitPullRequest, Activity, Sparkles } from 'lucide-react';
 import SectionNavigator from '../SectionNavigator';
 
 export default function StatsSection({ portfolio, sections, activeSection, setActiveSection }) {
   const { stats } = portfolio;
   const [loveCount, setLoveCount] = useState(stats.profileMetrics.initialLoves);
   const [hasLoved, setHasLoved] = useState(false);
-
-  const [githubMetrics, setGithubMetrics] = useState({
-    publicRepos: stats.githubStats.publicRepos || 15,
-    followers: stats.githubStats.followers || 8,
-    totalStars: stats.githubStats.totalStars || 0,
-    totalForks: stats.githubStats.totalForks || 0,
-    isLoading: true,
-  });
-
-  useEffect(() => {
-    let isMounted = true;
-    async function fetchGitHubData() {
-      try {
-        const [userRes, reposRes] = await Promise.all([
-          fetch('https://api.github.com/users/anasahmedx5'),
-          fetch('https://api.github.com/users/anasahmedx5/repos?per_page=100')
-        ]);
-
-        if (userRes.ok && reposRes.ok) {
-          const userData = await userRes.json();
-          const reposData = await reposRes.json();
-
-          if (Array.isArray(reposData)) {
-            const stars = reposData.reduce((acc, r) => acc + (r.stargazers_count || 0), 0);
-            const forks = reposData.reduce((acc, r) => acc + (r.forks_count || 0), 0);
-
-            if (isMounted) {
-              setGithubMetrics({
-                publicRepos: userData.public_repos ?? 15,
-                followers: userData.followers ?? 8,
-                totalStars: stars,
-                totalForks: forks,
-                isLoading: false,
-              });
-            }
-          }
-        }
-      } catch (err) {
-        console.error('Failed to fetch GitHub stats:', err);
-        if (isMounted) {
-          setGithubMetrics(prev => ({ ...prev, isLoading: false }));
-        }
-      }
-    }
-
-    fetchGitHubData();
-    return () => { isMounted = false; };
-  }, []);
 
   const handleLove = () => {
     if (!hasLoved) {
@@ -75,20 +27,9 @@ export default function StatsSection({ portfolio, sections, activeSection, setAc
     >
       <section className="mb-2">
         <div className="flex flex-col items-start gap-1 py-0">
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold leading-tight tracking-tighter sm:text-3xl md:text-4xl lg:leading-[1.1] text-foreground">
-              Stats & Activity
-            </h1>
-            <a
-              href="https://github.com/anasahmedx5"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors"
-            >
-              <span>Live GitHub API</span>
-              <ExternalLink className="h-3 w-3" />
-            </a>
-          </div>
+          <h1 className="text-2xl font-bold leading-tight tracking-tighter sm:text-3xl md:text-4xl lg:leading-[1.1] text-foreground">
+            Stats & Activity
+          </h1>
           <h2 className="text-2xl font-bold leading-tight tracking-tighter sm:text-3xl md:text-4xl lg:leading-[1.1] mt-2 text-muted-foreground">
             Real-time developer metrics and engagement!
           </h2>
@@ -124,45 +65,45 @@ export default function StatsSection({ portfolio, sections, activeSection, setAc
         </button>
       </div>
 
-      {/* Live GitHub Overview Cards Grid */}
+      {/* Overview Cards Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 my-2">
-        <div className="rounded-xl border border-border/60 bg-card p-4 flex flex-col justify-between shadow-xs">
+        <div className="rounded-xl border border-border/60 bg-card p-4 flex flex-col justify-between">
           <div className="flex items-center justify-between text-muted-foreground">
-            <span className="text-xs font-medium">Public Repos</span>
-            <FolderGit2 className="h-4 w-4 text-sky-400" />
+            <span className="text-xs font-medium">Profile Views</span>
+            <Eye className="h-4 w-4 text-sky-400" />
           </div>
           <span className="text-2xl font-bold text-foreground mt-3 font-mono">
-            {githubMetrics.publicRepos}
+            {stats.profileMetrics.initialViews + 47}
           </span>
         </div>
 
-        <div className="rounded-xl border border-border/60 bg-card p-4 flex flex-col justify-between shadow-xs">
+        <div className="rounded-xl border border-border/60 bg-card p-4 flex flex-col justify-between">
           <div className="flex items-center justify-between text-muted-foreground">
-            <span className="text-xs font-medium">Followers</span>
-            <Users className="h-4 w-4 text-emerald-400" />
+            <span className="text-xs font-medium">Commits</span>
+            <GitCommit className="h-4 w-4 text-emerald-400" />
           </div>
           <span className="text-2xl font-bold text-foreground mt-3 font-mono">
-            {githubMetrics.followers}
+            {stats.githubStats.totalCommits}
           </span>
         </div>
 
-        <div className="rounded-xl border border-border/60 bg-card p-4 flex flex-col justify-between shadow-xs">
+        <div className="rounded-xl border border-border/60 bg-card p-4 flex flex-col justify-between">
+          <div className="flex items-center justify-between text-muted-foreground">
+            <span className="text-xs font-medium">Pull Requests</span>
+            <GitPullRequest className="h-4 w-4 text-purple-400" />
+          </div>
+          <span className="text-2xl font-bold text-foreground mt-3 font-mono">
+            {stats.githubStats.totalPRs}
+          </span>
+        </div>
+
+        <div className="rounded-xl border border-border/60 bg-card p-4 flex flex-col justify-between">
           <div className="flex items-center justify-between text-muted-foreground">
             <span className="text-xs font-medium">Stars</span>
             <Star className="h-4 w-4 text-amber-400" />
           </div>
           <span className="text-2xl font-bold text-foreground mt-3 font-mono">
-            {githubMetrics.totalStars}
-          </span>
-        </div>
-
-        <div className="rounded-xl border border-border/60 bg-card p-4 flex flex-col justify-between shadow-xs">
-          <div className="flex items-center justify-between text-muted-foreground">
-            <span className="text-xs font-medium">Forks</span>
-            <GitFork className="h-4 w-4 text-purple-400" />
-          </div>
-          <span className="text-2xl font-bold text-foreground mt-3 font-mono">
-            {githubMetrics.totalForks}
+            {stats.githubStats.totalStars}
           </span>
         </div>
       </div>

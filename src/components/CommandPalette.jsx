@@ -6,9 +6,12 @@ export default function CommandPalette({ isOpen, onClose, sections, setActiveSec
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    if (!isOpen) return;
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        isOpen ? onClose() : null;
+      }
+      if (e.key === 'Escape' && isOpen) {
         onClose();
       }
     };
