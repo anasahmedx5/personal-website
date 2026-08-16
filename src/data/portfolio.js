@@ -9,7 +9,7 @@ export const portfolioData = {
     location: "Alexandria, Egypt",
     email: "anasfekrywork@outlook.com",
     phone: "+201211177265",
-    resumeUrl: "/Anas_Ahmed_Resume.pdf",
+    resumeUrl: `${import.meta.env.BASE_URL}Anas_Ahmed_Resume.pdf`,
     status: "Open for ML / AI Opportunities",
   },
   socialLinks: {
