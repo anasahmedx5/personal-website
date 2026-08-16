@@ -32,7 +32,8 @@ export default function IntroductionSection({ portfolio, sections, activeSection
             <a
               href={personal.resumeUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
+              download="Anas_Ahmed_Resume.pdf"
               className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 gap-2 px-4 rounded-md"
             >
               Get Resume

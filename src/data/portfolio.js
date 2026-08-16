@@ -1,3 +1,8 @@
+const getBaseUrl = () => {
+  const base = import.meta.env.BASE_URL || './';
+  return base.endsWith('/') ? base : `${base}/`;
+};
+
 export const portfolioData = {
   personal: {
     name: "Anas Ahmed",
@@ -9,7 +14,7 @@ export const portfolioData = {
     location: "Alexandria, Egypt",
     email: "anasfekrywork@outlook.com",
     phone: "+201211177265",
-    resumeUrl: "/Anas_Ahmed_Resume.pdf",
+    resumeUrl: `${getBaseUrl()}Anas_Ahmed_Resume.pdf`,
     status: "Open for ML / AI Opportunities",
   },
   socialLinks: {
@@ -170,14 +175,14 @@ export const portfolioData = {
   ],
   stats: {
     githubStats: {
-      totalStars: "35+",
-      totalCommits: "450+",
-      totalPRs: "25+",
-      contributionsYear: "650+"
+      publicRepos: 15,
+      followers: 8,
+      totalStars: 0,
+      totalForks: 0,
     },
     profileMetrics: {
-      initialViews: 980,
-      initialLoves: 245
+      initialViews: 120,
+      initialLoves: 42
     }
   }
 };
