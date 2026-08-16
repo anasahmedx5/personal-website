@@ -5,7 +5,7 @@ import { fileURLToPath, URL } from 'node:url';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: './', // Ensures assets load correctly on GitHub Pages regardless of repository subpath
+  base: '/personal-website/', // Set base path for GitHub Pages repository subpath
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

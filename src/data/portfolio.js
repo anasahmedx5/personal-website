@@ -170,14 +170,14 @@ export const portfolioData = {
   ],
   stats: {
     githubStats: {
-      totalStars: "35+",
-      totalCommits: "450+",
-      totalPRs: "25+",
-      contributionsYear: "650+"
+      publicRepos: 15,
+      followers: 8,
+      totalStars: 0,
+      totalForks: 0,
     },
     profileMetrics: {
-      initialViews: 980,
-      initialLoves: 245
+      initialViews: 120,
+      initialLoves: 42
     }
   }
 };
