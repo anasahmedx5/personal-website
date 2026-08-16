@@ -75,7 +75,8 @@ export default function MobileDrawer({
               <a
                 href={portfolio.personal.resumeUrl}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
+                download="Anas_Ahmed_Resume.pdf"
                 className="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-lg bg-primary text-primary-foreground text-sm font-medium shadow-xs hover:bg-primary/90 transition-colors"
               >
                 <span>View Resume</span>
